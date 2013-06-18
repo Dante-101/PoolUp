@@ -9,6 +9,8 @@ import org.apache.http.client.ClientProtocolException;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import com.example.connections.HitClient;
+import com.example.datatypes.Record;
 import com.google.gson.Gson;
 
 import android.app.Activity;
@@ -38,16 +40,8 @@ public class LoaderActivity extends ListActivity implements OnClickListener {
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle icicle) {
-
 		super.onCreate(icicle);
-	//	super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_loader);
-		//setContentView(R.layout.activity_loader);
-//		heading=(TextView)findViewById(R.id.output);
-//		heading.setText("Programme des soirées");
-
-		// just call here the task
-		
 	}
 
 
@@ -69,13 +63,6 @@ public class LoaderActivity extends ListActivity implements OnClickListener {
 			String json =client.sendGetRequest(uri, null, null);
          //   String res = ("{ \"response\" : " + json + "}"); 
             JSONObject js = new JSONObject(json);
-          
-          //  JSONArray recArr = js.getJSONArray("response"); 
-//            output =new ArrayList<String>();
-//            
-//            //JSONObject job = new JSONObject();
-//            Log.i("Output","Hello");
-//            
             Iterator it = js.keys();
             while(it.hasNext())
                 {
@@ -95,14 +82,8 @@ public class LoaderActivity extends ListActivity implements OnClickListener {
 	
 	public void submit(View view) {
 	   
-		
 		String[] messages =new String[2]; 
 		AsyncTask task = new LongOperation(this,messages).execute();
-		
-		
-		//{"Driver 1","Driver 2"};
-	//	intent1.putExtra(EXTRA_MESSAGE, message);
-	 
 		
 	}
 

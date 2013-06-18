@@ -17,6 +17,8 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 
+import com.example.asynctasks.RetreiveMapTask;
+import com.example.connections.HitClient;
 import com.example.firstapp.R;
 import com.google.android.gms.location.LocationClient;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -113,8 +115,6 @@ public class DisplayMessageActivity extends FragmentActivity {
 	}
 
 	public LatLng getLatAndLong(String uri) throws InterruptedException, ExecutionException, JSONException{
-		Log.i("Introduction","Hello i wish I am called");
-
 		String [] urls = new String[1]; 
 		urls[0]=uri;
 		AsyncTask<String,Void,String> jsonResponse = new RetreiveMapTask().execute(urls); 

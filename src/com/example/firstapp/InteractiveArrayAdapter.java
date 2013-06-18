@@ -2,6 +2,8 @@ package com.example.firstapp;
 
 import java.util.List;
 
+import com.example.datatypes.Record;
+
 import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;

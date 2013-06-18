@@ -27,6 +27,9 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.example.asynctasks.RetreiveMapTask;
+import com.example.connections.HitClient;
+import com.example.datatypes.Record;
 import com.example.firstapp.R;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesClient;
@@ -203,7 +206,6 @@ GooglePlayServicesClient.OnConnectionFailedListener{
 			Log.d("Location Updates",
 					"Google Play services is available.");
 			// Continue
-			System.out.println("fuck yeah");
 			return true;
 			// Google Play services was not available for some reason
 		} else {
