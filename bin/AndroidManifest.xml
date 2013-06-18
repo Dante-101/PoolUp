@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.firstapp"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="8"
+        android:targetSdkVersion="15" />
+
+	<uses-permission android:name="android.permission.WAKE_LOCK"></uses-permission>
+
+
+    <permission
+        android:name="com.example.mapdemo.permission.MAPS_RECEIVE"
+        android:protectionLevel="signature" />
+
+    <uses-permission android:name="com.example.mapdemo.permission.MAPS_RECEIVE" />
+
+    <permission
+        android:name="com.example.myapp.permission.C2D_MESSAGE"
+        android:protectionLevel="signature" />
+
+    <uses-permission android:name="com.example.myapp.permission.C2D_MESSAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+    <!-- External storage for caching. -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <!-- My Location -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <!-- Maps API needs OpenGL ES 2.0. -->
+    <uses-feature
+        android:glEsVersion="0x00020000"
+        android:required="true" />
+    <!-- End of copy. -->
+    <application
+        android:hardwareAccelerated="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="Demo!" >
+
+        <!--
+         ** You need to replace the key below with your own key. **
+         The example key below will not be accepted because it is not linked to the
+         certificate which you will use to sign this application.
+         See: https://developers.google.com/maps/documentation/android/start
+         for instructions on how to get your own key.
+        -->
+        <meta-data
+            android:name="com.google.android.maps.v2.API_KEY"
+            android:value="AIzaSyBWHAeiX5IFWZmpn0tJkH4LgU5guRPAgVE" />
+
+        <service
+            android:name="UpdateLocationService"/>
+        
+        <receiver  android:process=":remote" android:name="Alarm"></receiver>
+        
+        <receiver
+            android:name="com.example.firstapp.C2DMReceiver"
+            android:permission="com.google.android.c2dm.permission.SEND" >
+
+            <!-- Receive the actual message -->
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+
+                <category android:name="com.example.myapp" />
+            </intent-filter>
+            <!-- Receive the registration id -->
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
+
+                <category android:name="com.example.myapp" />
+            </intent-filter>
+        </receiver>
+        
+        <activity
+            android:name="com.example.firstapp.LoaderActivity"
+            android:label="@string/app_name" >
+        </activity>
+
+        <activity
+            android:name="com.example.firstapp.DummyDemoActivity"
+            android:label="@string/app_name" >
+           
+        </activity>
+        <activity
+            android:name="com.example.firstapp.DisplayMessageActivity"
+            android:label="@string/app_name"
+            android:parentActivityName="com.example.firstapp.DummyDemoActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.firstapp.MainActivity" />
+        </activity>
+        <activity
+            android:name="com.example.firstapp.ServerActivity"
+            android:label="@string/title_activity_main" >
+        </activity>
+        <activity
+            android:name="com.example.firstapp.FrontActivity"
+            android:label="@string/app_name" >
+             <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>
