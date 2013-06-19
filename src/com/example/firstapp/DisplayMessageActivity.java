@@ -57,7 +57,6 @@ public class DisplayMessageActivity extends FragmentActivity {
 		}
 		if(cord!=null)
 			Log.i("Cordinate",""+cord.latitude+" "+cord.longitude);
-		setupMap();
 		displayPath("SanFranscisco","MountainView","driving");
 	}
 
@@ -71,9 +70,8 @@ public class DisplayMessageActivity extends FragmentActivity {
 		} catch (Exception e) {
 			Log.i("Exception",e.getMessage());
 		} 
-		if(cord!=null)
-			Log.i("Cordinate",""+cord.latitude+" "+cord.longitude);
-		setupMap();
+		if(cord==null)
+			return;
 		displayPath("SanFranscisco","MountainView","driving");
 
 	}
@@ -137,9 +135,7 @@ public class DisplayMessageActivity extends FragmentActivity {
 
 	public void drawPath(String  result) {
 
-
 		List<LatLng> list ;
-
 		try {
 			final JSONObject json = new JSONObject(result);
 			JSONArray routeArray = json.getJSONArray("routes");
@@ -154,9 +150,6 @@ public class DisplayMessageActivity extends FragmentActivity {
 			for(int z = 0; z<list.size()-1;z++){
 				LatLng src= list.get(z);
 				LatLng dest= list.get(z+1);
-				Log.i("deb","asa");
-				Log.i("src","zz "+src.longitude+" "+src.latitude);
-				Log.i("dest",dest.longitude+" "+dest.latitude);	
 				Polyline line = mMap.addPolyline(new PolylineOptions()
 				.add(new LatLng(src.latitude, src.longitude), new LatLng(dest.latitude,   dest.longitude))
 				.width(5)
@@ -202,21 +195,6 @@ public class DisplayMessageActivity extends FragmentActivity {
 
 		return poly;
 	}
-
-
-
-
-	public void setupMap()
-	{
-
-		Log.i("check","PRINT YESS");
-		//			mMap.addMarker(new MarkerOptions().position(new LatLng(37.77503150,-122.06848490)).title("sanfran"));
-		//			Polyline line = mMap.addPolyline(new PolylineOptions()
-		//			.add(new LatLng(51.5, -0.1), new LatLng(40.7, -74.0))
-		//			.width(5)
-		//			.color(Color.RED));
-	}
-
 }
 
 

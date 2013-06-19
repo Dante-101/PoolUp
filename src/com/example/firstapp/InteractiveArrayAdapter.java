@@ -2,9 +2,8 @@ package com.example.firstapp;
 
 import java.util.List;
 
-import com.example.datatypes.Record;
-
 import android.app.Activity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +11,8 @@ import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.TextView;
+
+import com.example.datatypes.Record;
 
 
 public class InteractiveArrayAdapter extends ArrayAdapter<Record> {
@@ -48,9 +49,10 @@ public class InteractiveArrayAdapter extends ArrayAdapter<Record> {
 				@Override
 				public void onCheckedChanged(CompoundButton buttonView,
 						boolean isChecked) {
-					Model element = (Model) viewHolder.checkbox
+					Record element = (Record) viewHolder.checkbox
 							.getTag();
-					element.setSelected(buttonView.isChecked());
+					Log.i("User selected",element.getUserId());
+					//element.setSelected(buttonView.isChecked());
 
 				}
 			});

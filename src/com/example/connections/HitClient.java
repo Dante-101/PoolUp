@@ -27,7 +27,7 @@ import android.net.Uri;
 public class HitClient {
 
 	HttpClient httpclient = new DefaultHttpClient();
-
+	
 
 	public String sendGetRequest(String uri,String paramName,String json) throws URISyntaxException, ClientProtocolException, IOException
 	{

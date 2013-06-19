@@ -9,6 +9,7 @@ import org.apache.http.client.ClientProtocolException;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import com.example.connections.ConnectionsManager;
 import com.example.connections.HitClient;
 import com.example.datatypes.Record;
 import com.google.gson.Gson;
@@ -34,7 +35,7 @@ import android.widget.TextView;
 public class LoaderActivity extends ListActivity implements OnClickListener {
 	Button btn;
 	HitClient client = new HitClient();
-	String uri="https://not-fool-me.firebaseio-demo.com/users.json";
+	String uri=ConnectionsManager.db_url+"users.json";
 
 	TextView heading;
 	/** Called when the activity is first created. */
@@ -61,30 +62,29 @@ public class LoaderActivity extends ListActivity implements OnClickListener {
 		List<String> output = new ArrayList<String>();
 		try {
 			String json =client.sendGetRequest(uri, null, null);
-         //   String res = ("{ \"response\" : " + json + "}"); 
-            JSONObject js = new JSONObject(json);
-            Iterator it = js.keys();
-            while(it.hasNext())
-                {
-                	
-                  String name = (String)it.next();
-                  JSONObject res = (JSONObject)js.get(name);
-                  output.add(res.toString().toString()); 
-                 }
-         	return output;     
-		         
+			JSONObject js = new JSONObject(json);
+			Iterator it = js.keys();
+			while(it.hasNext())
+			{
+
+				String name = (String)it.next();
+				JSONObject res = (JSONObject)js.get(name);
+				output.add(res.toString().toString()); 
+			}
+			return output;     
+
 		} catch (Exception e) {
-		   e.printStackTrace();
+			e.printStackTrace();
 		}
-	
+
 		return output;
 	}
-	
+
 	public void submit(View view) {
-	   
+
 		String[] messages =new String[2]; 
 		AsyncTask task = new LongOperation(this,messages).execute();
-		
+
 	}
 
 	private class LongOperation extends AsyncTask<String, Void, String> {
@@ -99,7 +99,7 @@ public class LoaderActivity extends ListActivity implements OnClickListener {
 			dialog = new ProgressDialog(context);
 			this.msgs=msgs;
 			messages = new ArrayList<String>(); 
-            
+
 		}
 		@Override
 		protected String doInBackground(String... params) {
@@ -109,8 +109,6 @@ public class LoaderActivity extends ListActivity implements OnClickListener {
 
 		@Override
 		protected void onPostExecute(String result) {
-		//	TextView txt = (TextView) findViewById(R.id.output);
-			//txt.setText("Executed"); // txt.setText(result);
 			List<Record> titles = new ArrayList<Record>(messages.size());
 			Gson gson = new Gson();
 			for (String msg : messages){
@@ -126,12 +124,6 @@ public class LoaderActivity extends ListActivity implements OnClickListener {
 			if (dialog.isShowing()) {
 				dialog.dismiss();
 			}
-
-			//			if (success) {
-			//				Toast.makeText(context, "OK", Toast.LENGTH_LONG).show();
-			//			} else {
-			//				Toast.makeText(context, "Error", Toast.LENGTH_LONG).show();
-			//			}
 
 		}
 
