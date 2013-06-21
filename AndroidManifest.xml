@@ -20,7 +20,7 @@
     <permission
         android:name="com.example.firstapp.permission.C2D_MESSAGE"
         android:protectionLevel="signature" />
-
+	
     <uses-permission android:name="com.example.firstapp.permission.C2D_MESSAGE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
